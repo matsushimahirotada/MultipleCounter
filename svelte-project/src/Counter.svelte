@@ -1,44 +1,52 @@
 <script>
 	
+    import { createEventDispatcher} from 'svelte';
     export let id;
     let name = 'new'; 
 	let count = 0;
-    import Box from './Box.svelte';
-	function ClickInc(){
+
+    const dispatch = createEventDispatcher();
+
+
+	function CounterInc(){
 		count +=1
 	}
 
-	function ClickDec(){
+	function CounterDec(){
 		if (count>0){
 			count -=1
 		}
 	}
 
-	function Clickreset(){
+	function Counterreset(){
 		count=0
 	}
+    
+    function deleteCounter(){
+
+    }
 
 </script>
 
-<!-- svelte-ignore non-top-level-reactive-declaration -->
-<Box>
-	
-        <input bind:value={name}>
+    <input bind:value={name}>
 
-        {count}
+    {count}
 	
-        <button on:click={ClickInc}>
-            +
-        </button>
+    <button on:click={CounterInc}>
+        +
+    </button>
 	
-        <button on:click={ClickDec}>
-            -
-        </button>
+    <button on:click={CounterDec}>
+        -
+    </button>
 	
-        <button on:click={Clickreset}>
-		    0
-	    </button>
-</Box>
+    <button on:click={Counterreset}>
+        0
+    </button>
+
+    <button on:click={deleteCounter}>
+        X
+    </button>
 
 <style>
 </style>
