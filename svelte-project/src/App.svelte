@@ -1,40 +1,22 @@
 <script>
-	let name = "new"; 
-	export let count = 0;
-	function ClickInc(){
-		count +=1
-	}
-
-	function ClickDec(){
-		if (count>0){
-			count -=1
-		}
-	}
-
-	function Clickreset(){
-		count=0
+    import Counter from './Counter.svelte';
+	let CounterArray = [{id:0}];
+	function addCounter(){
+		CounterArray[CounterArray.length] = {id:CounterArray.length}
+		console.log(CounterArray)
 	}
 
 </script>
 
 <!-- svelte-ignore non-top-level-reactive-declaration -->
-<div>
-	<input bind:value={name}>
 
-	{count}
-	
-	<button on:click={ClickInc}>
-		+
-	</button>
-	
-	<button on:click={ClickDec}>
-		-
-	</button>
-	
-	<button on:click={Clickreset}>
-		0
-	</button>
-</div>
+<button on:click={addCounter}>
+	new counter
+</button>
+
+{#each CounterArray as counter}
+	<Counter id={counter.id}/>
+{/each}
 
 <style>
 </style>
