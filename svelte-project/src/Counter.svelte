@@ -4,37 +4,36 @@
     const dispatch = createEventDispatcher();
 
     export let id;
-    export let name = 'new'; 
-	let count = 0;
+	export let count=0;
+
 	function ClickInc(){
 		count +=1
+        dispatch('updatecountorder',{order:id,count:this.count})
 	}
 
 	function ClickDec(){
 		if (count>0){
 			count -=1
+            dispatch('updatecountorder',{order:id,count:this.count})
 		}
 	}
 
 	function Clickreset(){
 		count=0
+        dispatch('updatecountorder',{order:id,count:this.count})
 	}
 
     function deleteCounter(){
+        console.log(id)
         dispatch('deleteorder',{order:id});
     }
 
-    function updateCountername(){
-        dispatch('updatecounterorder',{name:this.name,id:this.id});
-    }
 </script>
 
 <!-- svelte-ignore non-top-level-reactive-declaration -->
 	
 
-    <input bind:value={name}>
-
-    {count}
+    
 	
     <button on:click={ClickInc}>
         +
