@@ -1,4 +1,5 @@
 <script>
+<<<<<<< HEAD
     import Counter from './Counter.svelte';
 	import Box from './Box.svelte';
 
@@ -43,11 +44,16 @@
 
 		return sum;
 	}
+=======
+    import Counter from './CounterArrangement.svelte';
+	
+>>>>>>> development
 
 </script>
 
 <!-- svelte-ignore non-top-level-reactive-declaration -->
 
+<<<<<<< HEAD
 <h1>カウンター</h1>
 
 <button on:click={addCounter}>
@@ -64,6 +70,9 @@
 		/>
 	</Box>
 {/each}
+=======
+<Counter/>
+>>>>>>> development
 
 	<div>title list:
 
