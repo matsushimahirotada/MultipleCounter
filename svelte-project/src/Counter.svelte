@@ -2,7 +2,6 @@
 	import { createEventDispatcher } from 'svelte';
 
     const dispatch = createEventDispatcher();
-    const dispatch2 = createEventDispatcher();
 
     export let id;
     export let name = 'new'; 
@@ -26,7 +25,7 @@
     }
 
     function updateCountername(){
-        dispatch2('updatecounterorder',{name:this.name,id:this.id});
+        dispatch('updatecounterorder',{name:this.name,id:this.id});
     }
 </script>
 
