@@ -1,24 +1,24 @@
 <script>
     import Counter from './Counter.svelte';
 	import Box from './Box.svelte';
-	$:CounterArray = [{id:0}];
+	$:CounterArray = [{id:0,name:'new'}];
+	$:deleteid = []
 
 	function addCounter(){
-		CounterArray[CounterArray.length] = {id:CounterArray.length}
+		CounterArray[CounterArray.length] = deleteid.length ? {id:deleteid.pop(),name:'new'} : {id:CounterArray.length,name:'new'}
 	}
 
 	function deleteCounter(event){
 		const id = event.detail.order
-		tempArray = CounterArray.filter((CounterArray)=>{
+		const tempArray = CounterArray.filter((CounterArray)=>{
 			return (CounterArray.id != id);
 		});
 		
-		for(let i = id;i<tempArray;i++){
-			tempArray[i] = {id:i} 
-		}
 		CounterArray = tempArray
-		console.log(tempArray)
-		console.log(id)
+	}
+
+	function updateCountername(event){
+
 	}
 
 </script>
@@ -35,6 +35,15 @@
 		id={counter.id}/>
 	</Box>
 {/each}
+
+<Box>
+	<p>
+		title list:
+		{#each  CounterArray as counter(counter.name) }
+			
+		{/each}
+	</p>
+</Box>
 
 <style>
 </style>

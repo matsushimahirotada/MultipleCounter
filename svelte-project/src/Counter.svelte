@@ -2,9 +2,10 @@
 	import { createEventDispatcher } from 'svelte';
 
     const dispatch = createEventDispatcher();
+    const dispatch2 = createEventDispatcher();
 
     export let id;
-    let name = 'new'; 
+    export let name = 'new'; 
 	let count = 0;
 	function ClickInc(){
 		count +=1
@@ -24,10 +25,14 @@
         dispatch('deleteorder',{order:id});
     }
 
+    function updateCountername(){
+        dispatch2('updatecounterorder',{name:this.name,id:this.id});
+    }
 </script>
 
 <!-- svelte-ignore non-top-level-reactive-declaration -->
 	
+
     <input bind:value={name}>
 
     {count}
