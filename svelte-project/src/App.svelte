@@ -2,52 +2,56 @@
     import Counter from './Counter.svelte';
 	import Box from './Box.svelte';
 
-
 	$:CounterArray = [{id:0,name:'new',count:0}];
-	$:deleteid = []
+	$:Sum = 0;
 
 	function addCounter(){
-		CounterArray[CounterArray.length] = deleteid.length ? {id:deleteid.pop(),name:'new',count:0} : {id:CounterArray.length,name:'new',count:0}
-		CounterArray.sort(function(a,b){
-			if(a.id<b.id) return -1;
-			if(a.id<b.id) return 1;
-			return 0;
-		});
-
-		console.log(CounterArray)
+		CounterArray[CounterArray.length] = {id:CounterArray.length,name:'new',count:0}
+		Sum=SumofCount()
 	}
 
 
 	function deleteCounter(event){
 		const id = event.detail.order
-		const tempArray = CounterArray.filter((CounterArray)=>{
-			return (CounterArray.id != id);
-		});
-		console.log(id)
-		console.log(tempArray)
-		deleteid.push(id)
-		CounterArray = tempArray
+		const firsthalfofArray = CounterArray.slice(0,id)
+		const letterhalfofArray = CounterArray.slice(id+1)
+		
+		for (const entry of letterhalfofArray){
+			firsthalfofArray[firsthalfofArray.length] = {id:firsthalfofArray.length,name:entry.name,count:entry.count};
+		}
+
+		CounterArray = firsthalfofArray;
+		Sum=SumofCount();
+
 	}
 
 	function updateCount(event){
-		const id = event.detail.id
-		const count = event.detail.count
-
-		const tempArray = CounterArray.filter((CounterArray)=>{
-			return (CounterArray.id != id);
-		});
+		const id = event.detail.Id;
+		const count = event.detail.Count;
 		
-		CounterArray = tempArray
-		CounterArray[CounterArray.length] = {id:id,name:'new',count:count}
+		CounterArray[id] = {id:id,name:CounterArray[id].name,count:count};
+		Sum = SumofCount();
 
+	}
+
+	function SumofCount(){
+		let sum=0;
+
+		for(const entry of CounterArray){
+			sum = sum + entry.count;
+		}
+
+		return sum;
 	}
 
 </script>
 
 <!-- svelte-ignore non-top-level-reactive-declaration -->
 
+<h1>カウンター</h1>
+
 <button on:click={addCounter}>
-	new counter
+	新しいカウンターを作成
 </button>
 
 {#each CounterArray as counter(counter.id)}
@@ -61,14 +65,15 @@
 	</Box>
 {/each}
 
-<Box>
 	<div>title list:
 
 		{#each CounterArray as {name}}
 			{name},
 		{/each}
 	</div>
-</Box>
 
+	<div>
+		sum of count:{Sum}
+	</div>
 <style>
 </style>

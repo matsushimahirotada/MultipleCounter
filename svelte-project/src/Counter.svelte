@@ -2,29 +2,29 @@
 	import { createEventDispatcher } from 'svelte';
 
     const dispatch = createEventDispatcher();
+    const dispatch2 = createEventDispatcher();
 
     export let id;
-	export let count=0;
+	$:count=0;
 
 	function ClickInc(){
 		count +=1
-        dispatch('updatecountorder',{order:id,count:this.count})
+        dispatch2('updatecountorder',{Id:id,Count:count});
 	}
 
 	function ClickDec(){
 		if (count>0){
 			count -=1
-            dispatch('updatecountorder',{order:id,count:this.count})
+            dispatch2('updatecountorder',{Id:id,Count:count});
 		}
 	}
 
 	function Clickreset(){
 		count=0
-        dispatch('updatecountorder',{order:id,count:this.count})
+        dispatch2('updatecountorder',{Id:id,Count:count});
 	}
 
     function deleteCounter(){
-        console.log(id)
         dispatch('deleteorder',{order:id});
     }
 
